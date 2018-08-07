@@ -1,0 +1,43 @@
+<%- include ./partials/head.ejs %>
+
+    <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+        <%- include ./partials/navigation.ejs %>
+            <div class="content-wrapper">
+                <div class="container-fluid">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/">BTCEXCHANGE</a>
+                        </li>
+                        <li class="breadcrumb-item active">Szczegóły Transakcji #<%= transData.id %></li>
+                    </ol>
+                    <div class="card mb-3">
+                            <div class="card-body">
+                                <h3>Transakcja #<%= transData.id %></h3>
+                                <p><strong>Ilość BTC: </strong><%= transData.units %>BTC<br><strong>Cena jednostki: </strong>$<%= transData.price %><br><strong>Cena całkowita: </strong><%= (transData.price * transData.units) %></p>
+                                <% if (transData.type == "Sprzedaż") { %>
+                                    <h3>Sprzedający</h3>
+                                <% } else { %>
+                                    <h3>Kupujący</h3>
+                                <% } %>
+                                <p>
+                                    <strong>Imię i Nazwisko: </strong> <%= owner.name + " " + owner.lastname %><br>
+                                    <strong>Telefon: </strong> <%= owner.phone %><br>
+                                    <strong>E-Mail: </strong> <%= owner.email %><br>
+                                    <strong>Numer dokumentu: </strong> <%= owner.documentId %><br>
+                                </p>
+
+                                <% if (transData.type == "Sprzedaż") { %>
+                                    <h3>Kupujący</h3>
+                                <% } else { %>
+                                    <h3>Sprzedający</h3>
+                                <% } %>
+                                <p>
+                                        <strong>Imię i Nazwisko: </strong> <%= client.name + " " + client.lastname %><br>
+                                        <strong>Telefon: </strong> <%= client.phone %><br>
+                                        <strong>E-Mail: </strong> <%= client.email %><br>
+                                        <strong>Numer dokumentu: </strong> <%= client.documentId %><br>
+                                    </p>
+                            </div>
+                    </div>
+                </div>
+<%- include ./partials/footer.ejs %>

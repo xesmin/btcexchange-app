@@ -1,0 +1,66 @@
+<%- include ./partials/head.ejs %>
+
+    <body class="bg-dark">
+        <div class="container">
+            <div class="card card-register mx-auto mt-5">
+                <div class="card-header">Rejestracja Konta</div>
+                <div class="card-body">
+                    <form method="post" action="/register">
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <label for="name">Imię</label>
+                                    <input class="form-control" id="name" type="text" name="name" placeholder="Imię" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="lastname">Nazwisko</label>
+                                    <input class="form-control" id="lastname" type="text" name="lastname" placeholder="Nazwisko" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Adres E-Mail</label>
+                            <input class="form-control" id="email" type="email" name="email" placeholder="E-Mail" required>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <label for="phone">Numer Telefonu</label>
+                                    <input class="form-control" id="phone" type="text" name="phone" placeholder="Numer Telefonu" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="documentId">Numer Dokumentu</label>
+                                    <input class="form-control" id="documentId" type="text" name="documentId" placeholder="Numer Dokumentu" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="username">Nazwa Użytkownika</label>
+                            <input class="form-control" id="username" type="text" name="username" placeholder="Nazwa Użytkownika" required>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <label for="password">Hasło</label>
+                                    <input class="form-control" id="password" type="password" name="password" placeholder="Hasło" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="password2">Powtórz Hasło</label>
+                                    <input class="form-control" id="password2" type="password" name="password2" placeholder="Powtórz Hasło" required>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary btn-block ">Rejestracja</button>
+                    </form>
+                    <div class="text-center">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    </body>
+
+    </html>

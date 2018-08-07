@@ -1,0 +1,47 @@
+<%- include ./partials/head.ejs %>
+
+    <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+        <%- include ./partials/navigation.ejs %>
+            <div class="content-wrapper">
+                <div class="container-fluid">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/">BTCEXCHANGE</a>
+                        </li>
+                        <li class="breadcrumb-item active">Dodaj Ofertę</li>
+                    </ol>
+                    <div class="container">
+                            <div class="row">
+                              <div class="col-lg-3"></div>
+                              <div class="col-lg-6">
+                                <div class="card mb-3">
+                                  <div class="card-header">
+                                    <strong>Nowa Transakcja</strong>
+                                  </div>
+                                  <div class="card-body">
+                                    <form class="form" method="post" action="/transaction/add">
+                                        <div class="form-group">
+                                            <label for="type"><strong>Typ</strong></label>
+                                            <select class="form-control" id="type" name="type">
+                                              <option>Sprzedaż</option>
+                                              <option>Kupno</option>
+                                            </select>
+                                          </div>
+                                      <div class="form-group">
+                                        <label for="units"><strong>Ilość BTC</strong></label>
+                                        <input type="text" class="form-control" id="units" name="units" required>
+                                      </div>
+                                      <div class="form-group">
+                                        <label for="price"><strong>Kurs $</strong> (separatorem jest kropka np. 0.10)</label>
+                                        <input type="text" class="form-control" id="price" name="price" required>
+                                      </div>
+                                      <button class="btn btn-success" style="width: 100%;">Zatwierdź</button>
+                                    </form>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-lg-3"></div>
+                            </div>
+                          </div>
+                </div>
+<%- include ./partials/footer.ejs %>

@@ -1,0 +1,19 @@
+<%- include ./partials/head.ejs %>
+
+    <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+        <%- include ./partials/navigation.ejs %>
+            <div class="content-wrapper">
+                <div class="container-fluid">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/">BTCEXCHANGE</a>
+                        </li>
+                        <li class="breadcrumb-item active">Niepowodzenie Transakcji</li>
+                    </ol>
+                    <div class="card mb-3">
+                            <div class="card-body">
+                                <strong>Transakcja zakończyła się niepowodzeniem. Możliwe, że ktoś Cię ubiegł lub wystawiający wycofał ofertę. <a href="/">Powrót do giełdy</a></strong>
+                            </div>
+                    </div>
+                </div>
+<%- include ./partials/footer.ejs %>

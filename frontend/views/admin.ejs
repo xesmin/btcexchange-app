@@ -1,0 +1,58 @@
+<%- include ./partials/head.ejs %>
+
+    <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+        <%- include ./partials/navigation.ejs %>
+            <div class="content-wrapper">
+                <div class="container-fluid">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/">BTCEXCHANGE</a>
+                        </li>
+                        <li class="breadcrumb-item active">Panel Administracyjny</li>
+                    </ol>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h1>Weryfikacja Użytkowników</h1>
+                            <table class="table table-responsive">
+                                <thead>
+                                    <tr>
+                                        <td>#ID</td>
+                                        <td>Użytkownik</td>
+                                        <td>Imię i Nazwisko</td>
+                                        <td>Email</td>
+                                        <td>Telefon</td>
+                                        <td>Dokument</td>
+                                        <td>Weryfikacja</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% for (var i = 0; i < usersList.length; i++) { %>
+                                        
+                                        <tr>
+                                            <td><%= usersList[i].id %></td>
+                                            <td><%= usersList[i].username %></td>
+                                            <td><%= usersList[i].name %> <%= usersList[i].lastname %></td>
+                                            <td><%= usersList[i].email %></td>
+                                            <td><%= usersList[i].phone %></td>
+                                            <td><%= usersList[i].documentId %></td>
+                                            <td>
+                                                <% if (usersList[i].verifiedEmail) { %>
+                                                    <form method="post" action="/admin/user/verify/<%= usersList[i].id %>?_method=delete">
+                                                    <button class="btn btn-success btn-sm">Zweryfikowany</button>
+                                                    </form>
+                                                <% } else { %>
+                                                    <form method="post" action="/admin/user/verify/<%= usersList[i].id %>?_method=put">
+                                                    <button class="btn btn-danger btn-sm">Niezweryfikowany</button>
+                                                    </form>
+                                                <% } %>
+
+
+                                            </td>
+                                        </tr>    
+                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+                </div>
+<%- include ./partials/footer.ejs %>

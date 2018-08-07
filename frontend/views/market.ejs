@@ -1,0 +1,190 @@
+<%- include ./partials/head.ejs %>
+
+    <body class="fixed-nav sticky-footer bg-dark" id="page-top">
+        <%- include ./partials/navigation.ejs %>
+            <div class="content-wrapper">
+                <div class="container-fluid">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item">
+                            <a href="/">BTCEXCHANGE</a>
+                        </li>
+                        <li class="breadcrumb-item active">Giełda</li>
+                    </ol>
+                    <div class="row">
+
+                        <div class="col-lg-6">
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <i class="fa fa-table"></i>
+                                    <strong> OFERTY SPRZEDAŻY</strong>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <% if (user) { %>
+                                            <% if (user.verifiedEmail) { %>
+                                                <a href="/transaction/add" class="btn btn-info btn-sm">Wystaw Ofertę Sprzedaży</a>
+                                            <% } else { %>
+                                                Twoje konto jest w trakcje weryfikacji przez administratora.<br>Po pomyślnej weryfikacji dodawanie i korzystanie z ofert zostanie odblokowane.
+                                            <% } %>
+                                        <% } else { %>
+                                                Zaloguj się aby przyjmować i wystawiać oferty sprzedaży.
+                                        <% } %>
+                                        <br>
+                                        <br>
+                                        <% var x=0; for (i = 0; i < transData.length; i++) { if (transData[i].type == "Sprzedaż" && transData[i].status == "OPEN") x++} if (x>0) {%>
+                                        <table class="table table-bordered" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Ilość</th>
+                                                    <th>Kurs</th>
+                                                    <th>Cena Całkowita</th>
+                                                    <% if (user && user.verifiedEmail) { %>
+                                                    <th>Zakup</th>
+                                                    <% } %>
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Ilość</th>
+                                                    <th>Kurs</th>
+                                                    <th>Cena Całkowita</th>
+                                                    <% if (user && user.verifiedEmail) { %>
+                                                    <th>Zakup</th>
+                                                    <% } %>
+                                                </tr>
+                                            </tfoot>
+                                            <tbody>
+                                                    <% for (i = transData.length -1; i >= 0; i--) { %>
+                                                    <% if (transData[i].status == "OPEN" && transData[i].type == "Sprzedaż") { %>
+                                                    <tr>
+                                                        <td>#<%= transData[i].id %></td>
+                                                        <td><%= transData[i].units %> BTC</td>
+                                                        <td>$<%= transData[i].price %></td>
+                                                        <td>$<%= (transData[i].units * transData[i].price) %></td>
+                                                        <% if (user && user.verifiedEmail) { %>
+                                                        <td>
+                                                            <% if (transData[i].owner != user.id) { %>
+                                                                <a href="/transaction/confirmation/<%= transData[i].id %>" class="btn btn-success btn-sm" style="width: 100%;">Kup</a>
+                                                            <% } else { %>
+                                                                Twoja oferta
+                                                            <% } %>
+                                                        </td>
+                                                        <% } %>
+                                                    </tr>
+                                                    <% } %>
+                                                    <% if (transData[i].status == "FINISHED" && transData[i].type == "Sprzedaż") { %>
+                                                        <tr>
+                                                            <td>#<%= transData[i].id %></td>
+                                                            <td><%= transData[i].units %> BTC</td>
+                                                            <td>$<%= transData[i].price %></td>
+                                                            <td>$<%= (transData[i].units * transData[i].price) %></td>
+                                                            <% if (user && user.verifiedEmail) { %>
+                                                            <td>
+                                                                <button class="btn btn-disabled btn-sm">Zakończona</button>
+                                                            </td>
+                                                            <% } %>
+                                                        </tr>
+                                                        <% } %>
+                                                    <% } %>
+                                                </tbody>
+                                        </table>
+                                        <% } else { %>
+                                        <p>Brak ofert sprzedaży. Wystaw pierwszą!</p>
+                                        <% } %>
+                                    </div>
+                                </div>
+                                <div class="card-footer small text-muted">Zaktualizowano przed 1 sekundą.</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <i class="fa fa-table"></i>
+                                    <strong> OFERTY KUPNA</strong>
+                                </div>
+                                <div class="card-body">
+
+                                    <div class="table-responsive">
+                                            <% if (user) { %>
+                                                <% if (user.verifiedEmail) { %>
+                                                    <a href="/transaction/add" class="btn btn-info btn-sm">Wystaw Ofertę Kupna</a>
+                                                <% } else { %>
+                                                    Twoje konto jest w trakcje weryfikacji przez administratora.<br>Po pomyślnej weryfikacji dodawanie i korzystanie z ofert zostanie odblokowane.
+                                                <% } %>
+                                            <% } else { %>
+                                                    Zaloguj się aby przyjmować i wystawiać oferty kupna.
+                                            <% } %>
+                                        <br>
+                                        <br>
+                                        <% var x=0; for (i = 0; i < transData.length; i++) { if (transData[i].type == "Kupno" && transData[i].status == "OPEN") x++} if (x>0) {%>
+                                        <table class="table table-bordered" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Ilość</th>
+                                                    <th>Kurs</th>
+                                                    <th>Cena Całkowita</th>
+                                                    <% if (user && user.verifiedEmail) { %>
+                                                    <th>Sprzedaż</th>
+                                                    <% } %>
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th>ID</th>
+                                                    <th>Ilość</th>
+                                                    <th>Kurs</th>
+                                                    <th>Cena Całkowita</th>
+                                                    <% if (user && user.verifiedEmail) { %>
+                                                    <th>Sprzedaż</th>
+                                                    <% } %>
+                                                </tr>
+                                            </tfoot>
+                                            <tbody>
+                                                <% for (i = transData.length -1; i >= 0; i--) { %>
+                                                <% if (transData[i].status == "OPEN" && transData[i].type == "Kupno") { %>
+                                                <tr>
+                                                    <td>#<%= transData[i].id %></td>
+                                                    <td><%= transData[i].units %> BTC</td>
+                                                    <td>$<%= transData[i].price %></td>
+                                                    <td>$<%= (transData[i].units * transData[i].price) %></td>
+                                                    <% if (user && user.verifiedEmail) { %>
+                                                    <td>
+                                                        <% if (transData[i].owner != user.id) { %>
+                                                        <a href="/transaction/confirmation/<%= transData[i].id%>" class="btn btn-danger btn-sm" style="width: 100%;">Sprzedaj</a>
+                                                        <% } else { %>
+                                                            Twoja oferta
+                                                        <% } %>
+                                                    </td>
+                                                    <% } %>
+                                                </tr>
+                                                <% } %>
+                                                <% if (transData[i].status == "FINISHED" && transData[i].type == "Kupno") { %>
+                                                    <tr>
+                                                        <td>#<%= transData[i].id %></td>
+                                                        <td><%= transData[i].units %> BTC</td>
+                                                        <td>$<%= transData[i].price %></td>
+                                                        <td>$<%= (transData[i].units * transData[i].price) %></td>
+                                                        <% if (user && user.verifiedEmail) { %>
+                                                        <td>
+                                                            <button class="btn btn-disabled btn-sm">Zakończona</button>
+                                                        </td>
+                                                        <% } %>
+                                                    </tr>
+                                                    <% } %>
+                                                <% } %>
+                                            </tbody>
+                                        </table>
+                                        <% } else { %>
+                                            <p>Brak ofert kupna. Wystaw pierwszą!</p>
+                                        <% } %>
+                                    </div>
+                                </div>
+                                <div class="card-footer small text-muted">Zaktualizowano przed 1 sekundą.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<%- include ./partials/footer.ejs %>
